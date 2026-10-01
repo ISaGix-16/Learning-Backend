@@ -1,0 +1,17 @@
+{
+  "name": "leraning-backend",
+  "version": "1.0.0",
+  "description": "Learning backend, Let's have fun.",
+  "keywords": [
+    "Javascript",
+    "Backend",
+    "iSaGix16"
+  ],
+  "license": "ISC",
+  "author": "Aman Arya aka iSaGix16",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
