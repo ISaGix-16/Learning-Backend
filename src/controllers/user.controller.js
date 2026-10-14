@@ -254,7 +254,7 @@ const changeCurrentPassword = asyncHandler(async (req, res) => {
 const getCurrentUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
-    .json(200, req.user, "Current user fetched Successfully");
+    .json(new ApiResponse(200, req.user, "Current user fetched Successfully"));
 });
 
 const updateAccoubtDetails = asyncHandler(async (req, res) => {
@@ -284,13 +284,13 @@ const upadateUserAvatar = asyncHandler(async (req, res) => {
   const avatarLocalPath = req.file?.path;
 
   if (!avatarLocalPath) {
-    new ApiError(400, "Avatar file is missing");
+    throw new ApiError(400, "Avatar file is missing");
   }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath);
 
   if (!avatar.url) {
-    new ApiError(400, "Error while Uploading avatar");
+    throw new ApiError(400, "Error while Uploading avatar");
   }
 
   const user = await User.findByIdAndUpdate(
@@ -312,13 +312,13 @@ const upadateUserCoverImage = asyncHandler(async (req, res) => {
   const coverImageLocalPath = req.file?.path;
 
   if (!coverImageLocalPath) {
-    new ApiError(400, "Cover Image file is missing");
+    throw new ApiError(400, "Cover Image file is missing");
   }
 
   const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
   if (!coverImage.url) {
-    new ApiError(400, "Error while Uploading cover image");
+    throw new ApiError(400, "Error while Uploading cover image");
   }
 
   const user = await User.findByIdAndUpdate(
@@ -400,7 +400,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
   }
 
   return res
-    .statu(200)
+    .status(200)
     .json(
       new ApiResponse(200, channel[0], "User channel fetched successfully")
     );
@@ -457,10 +457,8 @@ const getWatchHistory = asyncHandler(async (req, res) => {
         user[0].watchHistory,
         "watch history fetched successfully"
       )
-    )
+    );
 });
-
-
 
 export {
   registerUser,
