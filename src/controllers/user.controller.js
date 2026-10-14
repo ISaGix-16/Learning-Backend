@@ -163,7 +163,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
+      $unset: {
         refreshToken: 1,
       },
     },
@@ -277,7 +277,7 @@ const updateAccoubtDetails = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(new ApiResponse(200, "Account details updated successfully."));
+    .json(new ApiResponse(200, user, "Account details updated successfully."));
 });
 
 const upadateUserAvatar = asyncHandler(async (req, res) => {
